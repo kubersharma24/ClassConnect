@@ -3,7 +3,7 @@ package com.example.MasterRoom.Services;
 import com.example.MasterRoom.Model.Dtos.RequestDTOs.LoginRequestDTO;
 import com.example.MasterRoom.Model.Dtos.RequestDTOs.RegistrationDTO;
 import com.example.MasterRoom.Model.Entitys.User;
-import com.example.MasterRoom.Repositories.UserRepository;
+import com.example.MasterRoom.Repositories.UserRepository.UserRepository;
 import com.example.MasterRoom.Utility.Mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -53,5 +53,11 @@ public class UserServiceImpl implements UserService{
             return "invalid password";
         }
         return "invalid userid";
+    }
+
+    @Override
+    public String GetRole(String username) {
+        User user = userRepository.findByEmail(username);
+        return user.getRole();
     }
 }
