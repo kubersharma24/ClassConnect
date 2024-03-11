@@ -1,4 +1,4 @@
-package com.example.MasterRoom.Repositories;
+package com.example.MasterRoom.Repositories.UserRepository;
 
 import com.example.MasterRoom.Model.Entitys.User;
 import org.springframework.data.jpa.repository.JpaRepository;

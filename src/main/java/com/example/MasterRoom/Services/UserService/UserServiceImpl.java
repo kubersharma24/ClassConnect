@@ -1,4 +1,4 @@
-package com.example.MasterRoom.Services;
+package com.example.MasterRoom.Services.UserService;
 
 import com.example.MasterRoom.Model.Dtos.RequestDTOs.LoginRequestDTO;
 import com.example.MasterRoom.Model.Dtos.RequestDTOs.RegistrationDTO;

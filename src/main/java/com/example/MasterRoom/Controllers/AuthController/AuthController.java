@@ -1,9 +1,9 @@
 package com.example.MasterRoom.Controllers.AuthController;
 
-import com.example.MasterRoom.Model.Dtos.RequestDTOs.RegistrationDTO;
 import com.example.MasterRoom.Model.JWT.JwtRequest;
 import com.example.MasterRoom.Model.JWT.JwtResponse;
 import com.example.MasterRoom.Security.JwtHelper;
+import com.example.MasterRoom.Services.UserService.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,8 @@ public class AuthController {
 
     @Autowired
     private AuthenticationManager manager;
-
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private JwtHelper helper;
@@ -38,18 +39,13 @@ public class AuthController {
         this.doAuthenticate(request.getEmail(), request.getPassword());
         UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
         String token = this.helper.generateToken(userDetails);
-
+        String role = userService.GetRole(userDetails.getUsername());
         JwtResponse response = JwtResponse.builder()
                 .jwtToken(token)
-                .userName(userDetails.getUsername()).build();
+                .userName(userDetails.getUsername())
+                .role(role)
+                .build();
         return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegistrationDTO request) {
-
-        return new ResponseEntity<>(request, HttpStatus.OK);
     }
 
     private void doAuthenticate(String email, String password) {

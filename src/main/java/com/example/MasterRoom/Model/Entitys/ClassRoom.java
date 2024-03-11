@@ -33,7 +33,6 @@ public class ClassRoom {
     private String className;
 
     private String description;
-    private String Subject;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "classid")
     private List<Quiz> quiz;
