@@ -1,4 +1,4 @@
-package com.example.MasterRoom.Model.Dtos.RequestDTOs;
+package com.example.MasterRoom.Model.Dtos.AuthDTO;
 
 import jakarta.persistence.Column;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.example.MasterRoom.Model.Dtos.RequestDTOs;
+package com.example.MasterRoom.Model.Dtos.AuthDTO;
 
 import lombok.Getter;
 import lombok.Setter;

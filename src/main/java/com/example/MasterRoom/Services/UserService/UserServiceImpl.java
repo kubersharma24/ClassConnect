@@ -1,7 +1,7 @@
 package com.example.MasterRoom.Services.UserService;
 
-import com.example.MasterRoom.Model.Dtos.RequestDTOs.LoginRequestDTO;
-import com.example.MasterRoom.Model.Dtos.RequestDTOs.RegistrationDTO;
+import com.example.MasterRoom.Model.Dtos.AuthDTO.LoginRequestDTO;
+import com.example.MasterRoom.Model.Dtos.AuthDTO.RegistrationDTO;
 import com.example.MasterRoom.Model.Entitys.User;
 import com.example.MasterRoom.Repositories.UserRepository.UserRepository;
 import com.example.MasterRoom.Utility.Mapper.Mapper;

@@ -1,10 +1,7 @@
 package com.example.MasterRoom.Model.Entitys;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 
@@ -14,12 +11,18 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @ToString
+@Builder
+@AllArgsConstructor
 public class Quiz {
 
     @Id
     @Column(name = "quizid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "fk_classid")
+//    private ClassRoom classRoom;
 
     @Column(name = "Quizname")
     private String QuizName;
@@ -28,10 +31,11 @@ public class Quiz {
     private String status;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "quizid")
+    @JoinColumn(name = "fk_quiz_id")
     private List<Questions> questions;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "quizid")
+    @JoinColumn(name = "fk_quiz_id")
     private List<Score> score;
+
 }

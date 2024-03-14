@@ -2,6 +2,8 @@ package com.example.MasterRoom.Services.ClassServices;
 
 import com.example.MasterRoom.Model.Dtos.RequestDTOs.CreateClassDTO.ClassCreationRequestDTO;
 import com.example.MasterRoom.Model.Dtos.RequestDTOs.CreateClassDTO.ClassCreationResponseDTO;
+import com.example.MasterRoom.Model.Dtos.RequestDTOs.DeleteClassResponse.DeleteClassResponseDTO;
+import com.example.MasterRoom.Model.Dtos.RequestDTOs.GetClassRoomWithClassCode.GetClassRoomWithClassCodeRequestDTO;
 import com.example.MasterRoom.Model.Dtos.RequestDTOs.GetClassRoomWithHandlerId.GetClassRoomWithHandlerIdRequestDTO;
 import com.example.MasterRoom.Model.Dtos.RequestDTOs.GetClassRoomWithHandlerId.GetClassRoomWithHandlerIdResponseDTO;
 import com.example.MasterRoom.Model.Entitys.ClassRoom;
@@ -59,6 +61,28 @@ public class ClassServiceImple implements ClassService {
                 .collect(Collectors.toList());
         return responseDTOs;
     }
+
+    @Override
+    public GetClassRoomWithHandlerIdResponseDTO getClassRoomWithClassCode(GetClassRoomWithClassCodeRequestDTO request) {
+        ClassRoom classroom = classRepository.findByClassCode(request.getClassCode());
+        return GetClassRoomWithHandlerIdResponseDTO.builder().classDescription(classroom.getDescription())
+                .className(classroom.getClassName())
+                .classCode(classroom.getClassCode())
+                .build();
+    }
+
+    @Override
+    public DeleteClassResponseDTO deleteClassWithClassCode(GetClassRoomWithClassCodeRequestDTO request) {
+
+        try{
+            ClassRoom byClassCode = classRepository.findByClassCode(request.getClassCode());
+            classRepository.delete(byClassCode);
+            return new DeleteClassResponseDTO("ok");
+        }catch (Exception e){
+            return new DeleteClassResponseDTO("Unable to delete check details");
+        }
+    }
+
     private GetClassRoomWithHandlerIdResponseDTO mapToResponseDTO(ClassRoom classRoom) {
         GetClassRoomWithHandlerIdResponseDTO responseDTO = new GetClassRoomWithHandlerIdResponseDTO();
         responseDTO.setClassName(classRoom.getClassName());

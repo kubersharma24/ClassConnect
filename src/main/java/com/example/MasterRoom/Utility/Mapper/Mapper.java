@@ -1,6 +1,6 @@
 package com.example.MasterRoom.Utility.Mapper;
 
-import com.example.MasterRoom.Model.Dtos.RequestDTOs.RegistrationDTO;
+import com.example.MasterRoom.Model.Dtos.AuthDTO.RegistrationDTO;
 import com.example.MasterRoom.Model.Entitys.User;
 import org.modelmapper.ModelMapper;
 

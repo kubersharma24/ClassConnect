@@ -1,7 +1,7 @@
 package com.example.MasterRoom.Controllers.UserController;
 
-import com.example.MasterRoom.Model.Dtos.RequestDTOs.RegistrationDTO;
-import com.example.MasterRoom.Model.Dtos.ResponseDTOs.ResgistrationResponse;
+import com.example.MasterRoom.Model.Dtos.AuthDTO.RegistrationDTO;
+import com.example.MasterRoom.Model.Dtos.AuthDTO.ResgistrationResponse;
 import com.example.MasterRoom.Services.UserService.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

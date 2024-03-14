@@ -9,4 +9,6 @@ public interface ClassRepository extends JpaRepository<ClassRoom , Long> {
     boolean existsByClassCode(String classCode);
 
     Page<ClassRoom> findByHandlerIdId(long id, PageRequest pageable);
+
+    ClassRoom findByClassCode(String classCode);
 }

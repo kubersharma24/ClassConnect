@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -33,8 +34,23 @@ public class ClassRoom {
     private String className;
 
     private String description;
+
+    //    @OneToMany(mappedBy = "classRoom", cascade = CascadeType.ALL)
+    //    private List<Quiz> quiz;
+
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "classid")
-    private List<Quiz> quiz;
+    @JoinColumn(name = "fk_class_id")
+   private List<Quiz> quiz;
+
+    public List<Quiz> getQuiz() {
+        return quiz;
+    }
+
+//    public void setQuiz(Quiz quizz) {
+//        if(quiz == null){
+//            quiz = new ArrayList<>();
+//        }
+//        quiz.add(quizz);
+//    }
 }
 
