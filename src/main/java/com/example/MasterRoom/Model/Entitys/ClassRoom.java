@@ -35,9 +35,6 @@ public class ClassRoom {
 
     private String description;
 
-    //    @OneToMany(mappedBy = "classRoom", cascade = CascadeType.ALL)
-    //    private List<Quiz> quiz;
-
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_class_id")
    private List<Quiz> quiz;
@@ -45,12 +42,5 @@ public class ClassRoom {
     public List<Quiz> getQuiz() {
         return quiz;
     }
-
-//    public void setQuiz(Quiz quizz) {
-//        if(quiz == null){
-//            quiz = new ArrayList<>();
-//        }
-//        quiz.add(quizz);
-//    }
 }
 

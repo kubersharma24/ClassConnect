@@ -20,10 +20,6 @@ public class Quiz {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "fk_classid")
-//    private ClassRoom classRoom;
-
     @Column(name = "Quizname")
     private String QuizName;
 

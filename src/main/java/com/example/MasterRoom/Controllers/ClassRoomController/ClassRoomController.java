@@ -32,7 +32,12 @@ public class ClassRoomController {
 
     @GetMapping("/{teacher}/classrooms")
     public ResponseEntity<?> getAllTheClassRoomOfTheTeacherId(@PathVariable("teacher") String handlerId, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
-        GetClassRoomWithHandlerIdRequestDTO request = GetClassRoomWithHandlerIdRequestDTO.builder().handlerId(handlerId).page(page).size(size).build();
+        GetClassRoomWithHandlerIdRequestDTO request = GetClassRoomWithHandlerIdRequestDTO
+                .builder()
+                .handlerId(handlerId)
+                .page(page)
+                .size(size)
+                .build();
         List<GetClassRoomWithHandlerIdResponseDTO> classrooms = classService.getClassRoomWithHandlerId(request);
         return new ResponseEntity<>(classrooms, HttpStatus.OK);
     }
