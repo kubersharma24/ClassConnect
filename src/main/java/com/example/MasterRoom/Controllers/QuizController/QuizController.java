@@ -3,6 +3,7 @@ package com.example.MasterRoom.Controllers.QuizController;
 import com.example.MasterRoom.Model.Dtos.RequestDTOs.CreateQuizRequest.CreateQuizRequestDTO;
 import com.example.MasterRoom.Model.Dtos.RequestDTOs.CreateQuizRequest.CreateQuizResponseDTO;
 import com.example.MasterRoom.Model.Dtos.RequestDTOs.GetAllQuizReponse.QuizResponse;
+import com.example.MasterRoom.Model.Dtos.RequestDTOs.QuizStatus.QuizStatusRequestDTO;
 import com.example.MasterRoom.Services.QuizServices.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,5 +29,8 @@ public class QuizController {
         List<QuizResponse> responses = quizService.getAllTheQuizInClass(classRoomCode,page,size);
         return new ResponseEntity<>(responses,HttpStatus.OK);
     }
-
+    @PostMapping("/classrooms/quizzes/status")
+    public ResponseEntity<?> getStatusOfQuiz(@RequestBody QuizStatusRequestDTO request){
+        return new ResponseEntity<>(quizService.setQuizStatus(request),HttpStatus.OK);
+    }
 }

@@ -4,6 +4,8 @@ import com.example.MasterRoom.Model.Dtos.RequestDTOs.CreateQuizRequest.CreateQui
 import com.example.MasterRoom.Model.Dtos.RequestDTOs.CreateQuizRequest.CreateQuizResponseDTO;
 import com.example.MasterRoom.Model.Dtos.RequestDTOs.GetAllQuizReponse.QuizResponse;
 import com.example.MasterRoom.Model.Dtos.RequestDTOs.GetClassRoomWithHandlerId.GetClassRoomWithHandlerIdResponseDTO;
+import com.example.MasterRoom.Model.Dtos.RequestDTOs.QuizStatus.QuizStatusRequestDTO;
+import com.example.MasterRoom.Model.Dtos.RequestDTOs.QuizStatus.QuizStatusResponse;
 import com.example.MasterRoom.Model.Entitys.ClassRoom;
 import com.example.MasterRoom.Model.Entitys.Quiz;
 import com.example.MasterRoom.Model.Entitys.User;
@@ -71,6 +73,21 @@ public class QuizServiceImple implements QuizService{
             return null;
         }
     }
+
+    @Override
+    public QuizStatusResponse setQuizStatus(QuizStatusRequestDTO request) {
+        if(quizRepository.existsById(request.getQuizId())){
+            Quiz quiz = quizRepository.findAllById(request.getQuizId());
+            if(quiz.getStatus().equals("on"))
+                quiz.setStatus("off");
+            else
+                quiz.setStatus("on");
+            quizRepository.save(quiz);
+            return new QuizStatusResponse("changed");
+        }
+        return new QuizStatusResponse("Quiz Not Found");
+    }
+
     private QuizResponse mapToQuizResponse(Quiz quiz) {
         QuizResponse response = new QuizResponse();
         response.setId(quiz.getId());
