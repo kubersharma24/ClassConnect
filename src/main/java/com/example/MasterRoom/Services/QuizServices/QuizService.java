@@ -5,6 +5,7 @@ import com.example.MasterRoom.Model.Dtos.RequestDTOs.CreateQuizRequest.CreateQui
 import com.example.MasterRoom.Model.Dtos.RequestDTOs.GetAllQuizReponse.QuizResponse;
 import com.example.MasterRoom.Model.Dtos.RequestDTOs.QuizStatus.QuizStatusRequestDTO;
 import com.example.MasterRoom.Model.Dtos.RequestDTOs.QuizStatus.QuizStatusResponse;
+import com.example.MasterRoom.Model.Dtos.ResponseDTO.QuizResponseDTO;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface QuizService {
     List<QuizResponse> getAllTheQuizInClass(String classRoomCode, int page, int size);
 
     QuizStatusResponse setQuizStatus(QuizStatusRequestDTO request);
+
+    QuizResponseDTO deleteQuizByQuizId(long quiz);
 }

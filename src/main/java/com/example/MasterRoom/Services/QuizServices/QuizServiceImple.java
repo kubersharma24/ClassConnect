@@ -6,6 +6,7 @@ import com.example.MasterRoom.Model.Dtos.RequestDTOs.GetAllQuizReponse.QuizRespo
 import com.example.MasterRoom.Model.Dtos.RequestDTOs.GetClassRoomWithHandlerId.GetClassRoomWithHandlerIdResponseDTO;
 import com.example.MasterRoom.Model.Dtos.RequestDTOs.QuizStatus.QuizStatusRequestDTO;
 import com.example.MasterRoom.Model.Dtos.RequestDTOs.QuizStatus.QuizStatusResponse;
+import com.example.MasterRoom.Model.Dtos.ResponseDTO.QuizResponseDTO;
 import com.example.MasterRoom.Model.Entitys.ClassRoom;
 import com.example.MasterRoom.Model.Entitys.Quiz;
 import com.example.MasterRoom.Model.Entitys.User;
@@ -86,6 +87,21 @@ public class QuizServiceImple implements QuizService{
             return new QuizStatusResponse("changed");
         }
         return new QuizStatusResponse("Quiz Not Found");
+    }
+
+    @Override
+    public QuizResponseDTO deleteQuizByQuizId(long quiz) {
+        try {
+            if(quizRepository.existsById(quiz)){
+            quizRepository.deleteById(quiz);
+            return new QuizResponseDTO("ok");
+            }else {
+                return new QuizResponseDTO("quiz not found");
+            }
+        } catch (Exception e) {
+            return new QuizResponseDTO("error :"+e);
+        }
+
     }
 
     private QuizResponse mapToQuizResponse(Quiz quiz) {

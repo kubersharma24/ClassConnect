@@ -4,7 +4,9 @@ import com.example.MasterRoom.Model.Dtos.RequestDTOs.CreateQuizRequest.CreateQui
 import com.example.MasterRoom.Model.Dtos.RequestDTOs.CreateQuizRequest.CreateQuizResponseDTO;
 import com.example.MasterRoom.Model.Dtos.RequestDTOs.GetAllQuizReponse.QuizResponse;
 import com.example.MasterRoom.Model.Dtos.RequestDTOs.QuizStatus.QuizStatusRequestDTO;
+import com.example.MasterRoom.Model.Dtos.ResponseDTO.QuizResponseDTO;
 import com.example.MasterRoom.Services.QuizServices.QuizService;
+import jakarta.validation.constraints.Past;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,5 +34,11 @@ public class QuizController {
     @PostMapping("/classrooms/quizzes/status")
     public ResponseEntity<?> getStatusOfQuiz(@RequestBody QuizStatusRequestDTO request){
         return new ResponseEntity<>(quizService.setQuizStatus(request),HttpStatus.OK);
+    }
+
+    @DeleteMapping("/teachers/classrooms/quizzes/{quiz}")
+    public ResponseEntity<?> deleteQuiz(@PathVariable("quiz") long quiz){
+        QuizResponseDTO response = quizService.deleteQuizByQuizId(quiz);
+        return new ResponseEntity<>(response,HttpStatus.OK);
     }
 }
