@@ -3,7 +3,7 @@ package com.example.MasterRoom.Services.QuestionServices;
 import com.example.MasterRoom.Model.Dtos.RequestDTOs.QuestionRequestDTO.ListOfQuestionRequestDTO;
 import com.example.MasterRoom.Model.Dtos.RequestDTOs.QuestionRequestDTO.QuestionRequestDTO;
 import com.example.MasterRoom.Model.Dtos.ResponseDTO.CreateQuestionResponseDTO;
-import com.example.MasterRoom.Model.Dtos.ResponseDTO.QuizResponseDTO;
+import com.example.MasterRoom.Model.Dtos.ResponseDTO.GetQuestionsForTeacherDTO;
 import com.example.MasterRoom.Model.Entitys.Questions;
 import com.example.MasterRoom.Model.Entitys.Quiz;
 import com.example.MasterRoom.Repositories.QuestionsRepository.QuestionsRepository;
@@ -46,5 +46,32 @@ public class QuestionServiceImpl implements QuestionService {
             return new CreateQuestionResponseDTO("QuizNotFound");
     }
 
+    @Override
+    public GetQuestionsForTeacherDTO getAllQuestionsOfOneQuizWithQuizId(long quizId) {
+        if(quizRepository.existsById(quizId)) {
+            Quiz quiz = quizRepository.findAllById(quizId);
+            if (quiz.getQuestions().size() == 0) {
+                return new GetQuestionsForTeacherDTO("Quiz Dont Have Questions", null);
+            }
+            GetQuestionsForTeacherDTO response = new GetQuestionsForTeacherDTO();
+            response.setStatus("ok");
+            List<QuestionRequestDTO> questions = new ArrayList<>();
+            for (Questions q : quiz.getQuestions()) {
+                QuestionRequestDTO questionRequestDTO = QuestionRequestDTO.builder()
+                        .id(q.getId())
+                        .question(q.getQuestion())
+                        .option1(q.getOption1())
+                        .option2(q.getOption2())
+                        .option3(q.getOption3())
+                        .option4(q.getOption4())
+                        .answer(q.getAnswer())
+                        .build();
+                questions.add(questionRequestDTO);
+            }
+            response.setQuestions(questions);
+            return response;
+        }
+        return new GetQuestionsForTeacherDTO("Quiz Not Found Error",null);
+    }
 
 }
